@@ -94,7 +94,7 @@ function keyPressed() {
 		if (third === 3 && keyCode === LEFT_ARROW && keyCode === RIGHT_ARROW) {
 			vidNum = 9;
 		} else
-			(third === 1 && (keyCode === UP_ARROW || keyCode === DOWN_ARROW)){
+			(third === 3 && (keyCode === UP_ARROW || keyCode === DOWN_ARROW)){
 			failCounter++;
 			vidNum = 10;
 		}

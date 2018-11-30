@@ -1,176 +1,238 @@
+//Declare variables
 
-var vid1;
-var vid2;
-var vid3;
-var vid4;
-var vid5;
-var vid6;
-var vid7;
-var vid8;
-var vid9;
-var vid10;
-var vid11;
+var sectionNum = 0;
+var section0;
+var section1;
+var section2;
+var section3;
+var section4;
+var section5;
+var section6;
+var section7;
+var section8;
+var section9;
+var section10;
+var section11;
+var section12;
+var section13;
+var section14;
+var section15;
 var failCounter = 0;
-var vidNum = 1;
 var challenge = 0;
-var finalChallenge = false;
-var third = 0;
+var nextChallenge = 0;
+var fail0;
+var fail1;
+var fail2;
+var fail3;
+var what = "start";
+var boo = false;
+
+
+//Layout variables
+var w = 1280;
+var h = 720;
+var fw = 107;
+var fh = 258;
+var challenge = 0;
+var pad = 60;
+var textFill = 255;
+var playFont;
+
+function preload(){
+	section0 = loadImage('assets/video1_intro.jpg');
+	section1 = loadImage('assets/sec.jpg');
+	section2 = loadImage('assets/sec2.jpg');
+	section3 = loadImage('assets/sec3.jpg');
+	section4 = loadImage('assets/sec4.jpg');
+	section5 = loadImage('assets/sec5.jpg');
+	section6 = loadImage('assets/sec6.jpg');
+	section7 = loadImage('assets/sec7.jpg');
+	section8 = loadImage('assets/sec8.jpg');
+	section9 = loadImage('assets/sec9.jpg');
+	section10 = loadImage('assets/sec10.jpg');
+	section11 = loadImage('assets/sec11.jpg');
+	section12 = loadImage('assets/sec12.jpg');
+	section13 = loadImage('assets/sec13.jpg');
+	section14 = loadImage('assets/sec14.jpg');
+	section15 = loadImage('assets/sec15.jpg');
+	playFont = loadFont('assets/PressStart2p-Regular.ttf');
+	fail0 = loadImage('assets/fail0.png');
+	fail1 = loadImage('assets/fail1.png');
+	fail2 = loadImage('assets/fail2.png');
+	fail3 = loadImage('assets/fail3.png');
+}
 
 function setup() {
-  // specify multiple formats for different browsers
-	vid1 = createVideo(['assets/video1.mp4'], vidLoad1);
-	vid2 = createVideo(['assets/video2.mp4'], vidLoad2);
-  vid3 = createVideo(['assets/video3.mp4'], vidLoad3);
-  vid4 = createVideo(['assets/video4.mp4'], vidLoad4);
-	vid5 = createVideo(['assets/video5.mp4'], vidLoad5);
-	vid6 = createVideo(['assets/video6.mp4'], vidLoad6);
-	vid7 = createVideo(['assets/video7.mp4'], vidLoad7);
-	vid8 = createVideo(['assets/video8.mp4'], vidLoad8);
-	vid9 = createVideo(['assets/video9.mp4'], vidLoad9);
-  vid10 = createVideo(['assets/video10.mp4'], vidLoad10);
-  vid11 = createVideo(['assets/video11.mp4'], vidLoad11);
+	createCanvas(w, h + 300);
+	if (sectionNum == 0) {
+		image(section0, 0, 0, w, h);
+	}
+	textFont(playFont);
+	// textAlign(CENTER, CENTER);
+	textSize(38);
+	fill(textFill);
 }
 
-// This function is called when the video loads
-
-//intro
-function vidLoad1() {
-	if (vidNum == 1) {
-	  vid1.play();
-		vidNum = 2;
-		challenge = 1;
-	}
+function draw() {
+	background(0);
+//BUTTON FUNCTIONALITY
+//start screen
+if (sectionNum == 0 && what == "start") {
+	image(section0, 0, 0, w, h);
+	challenge = 0;
+	text("Press the speaker to start", pad, h+pad, w - pad, 300);
 }
 
-// Challenge 1
-function vidLoad2() {
-	if (vidNum == 2 && challenge == 1) {
-	  vid2.play();
-	}
+//instructional
+if (sectionNum == 1) {
+	image(section1, 0, 0, w, h);
+	text("Something’s coming!! Pick the best object below to thwart each attack and avoid becoming that thing’s lunch!", pad, h+pad, w - pad, 300);
+}
+
+//challenge 1 setup
+if (sectionNum == 2) {
+	image(section2, 0, 0, w, h);
+	text("We need to divert this thing's attention, try throwing your voice!", pad, h+pad, w - pad, 300);
+}
+
+//challenge 1 success
+if (sectionNum == 3 && challenge == 1) {
+	image(section3, 0, 0, w, h);
+	challenge = 2;
+	text("The Surge is distracted, make a run it!", pad, h+pad, w - pad, 300);
+}
+
+//challenge 1 fail
+if (sectionNum == 4 && challenge == 1) {
+	image(section3, 0, 0, w, h);
+	challenge = 2;
+	text("The Surge saw you and electrifies you!", pad, h+pad, w - pad, 300);
+}
+
+//challenge 2 setup
+if (sectionNum == 5 && challenge == 2) {
+	image(section5, 0, 0, w, h);
+	text("Running isn't working, you need to trap him!", pad, h+pad, w - pad, 300);
+}
+
+//challenge 2 success
+if (sectionNum == 6 && challenge == 2) {
+	image(section6, 0, 0, w, h);
+	challenge = 3;
+	text("An electrifed net has trapped the surge!" , pad, h+pad, w - pad, 300);
+}
+
+//challenge 2 fail
+if (sectionNum == 7 && challenge == 2) {
+	image(section7, 0, 0, w, h);
+	challenge = 3;
+	text("You missed and the Surge nearly gets you!", pad, h+pad, w - pad, 300);
+}
+
+//challenge 3 setup
+if (sectionNum == 8 && challenge == 3) {
+	image(section8, 0, 0, w, h);
+	text("The Surge has escaped your attempts", pad, h+pad, w - pad, 300);
+}
+
+//challenge 3 attack 1
+if (sectionNum == 9 && challenge == 3) {
+	image(section9, 0, 0, w, h);
+	text("Block!" , pad, h+pad, w - pad, 300);
+}
+
+//challenge 3 attack 2
+if (sectionNum == 10 && challenge == 3) {
+	image(section10, 0, 0, w, h);
+	text("Deflect!", pad, h+pad, w - pad, 300);
+}
+
+//challenge 3 attack 3
+if (sectionNum == 11 && challenge == 3) {
+	image(section11, 0, 0, w, h);
+	text("Take him out!", pad, h+pad, w - pad, 300);
+}
+
+//game over / fail
+if (sectionNum == 12) {
+	image(section12, 0, 0, w, h);
+	text("YOU LOSE", pad, h+pad, w - pad, 300);
+}
+
+//win!
+if (sectionNum == 13) {
+	image(section13, 0, 0, w, h);
+	text("YOU WIN!!", pad, h+pad, w - pad, 300);
+}
+
+//Play again
+if (sectionNum == 14) {
+	image(section14, 0, 0, w, h);
+	text("Press any key to play again", pad, h+pad, w - pad, 300);
+}
+
+// Try again
+if (sectionNum == 15) {
+	image(section15, 0, 0, w, h);
+	text("Press any key to try again", pad, h+pad, w - pad, 300);
+}
+
+
+
+
+
+// these need to go at end of draw so they remain on top
+if (failCounter === 0 && challenge >= 1) {
+	image(fail0, pad, (h-pad-fh), fw, fh);
+}
+
+if (failCounter === 1 && challenge >= 1) {
+	image(fail1, pad, (h-pad-fh), fw, fh);
+}
+
+if (failCounter === 2 && challenge >= 1) {
+	image(fail2, pad, (h-pad-fh), fw, fh);
+}
+
+if (failCounter === 3 && challenge >= 1) {
+	image(fail3, pad, (h-pad-fh), fw, fh);
+}
+
+}
+
+function callBack1() {
+
 }
 
 function keyPressed() {
 
-	// 1 - success
-	if (keyCode === UP_ARROW && challenge === 1) {
-		vidNum = 3;
-		challenge = 2;
-	} // 1 - fail
-	else if (keyCode === RIGHT_ARROW || keyCode === LEFT_ARROW || DOWN_ARROW && challenge === 1) {
-		vidNum = 4;
-		challenge = 2;
+	//go from intro to instructions
+	if (challenge == 0 && (key === 'W' || key === 'w' || key === 'A' || key === 'a' || key === 'S'
+|| key === 's' || key === 'D' || key === 'd')){
+		sectionNum = 1;
+		what = "instruct";
+	}
+
+	// //go from intro to instructions
+	// if (challenge == 0 && what == "start" && (keyCode === UP_ARROW || keyCode === RIGHT_ARROW || keyCode === LEFT_ARROW || keyCode === DOWN_ARROW)){
+	// 	sectionNum = 1;
+	// 	what = "instruct";
+	// }
+
+	// go from instructions to challenge 1
+	if ((key === "A" || key === "a") && sectionNum == 1) {
+		sectionNum = 2;
+		challenge = 1;
+	}
+
+
+	// challenge one - success
+	if (keyCode === RIGHT_ARROW || keyCode === LEFT_ARROW || DOWN_ARROW && challenge === 1 && what == "instruct") {
+		sectionNum = 3;
 		failCounter++;
 	}
 
-	// 2 - success
-	if (keyCode === LEFT_ARROW && keyCode === RIGHT_ARROW && challenge == 2) {
-			vidNum = 6;
-			challenge = 3;
-	} // 2 - fail
-	if (keyCode === UP_ARROW || RIGHT_ARROW && challenge == 2) {
-			vidNum = 7;
-			challenge = 3;
-			failCounter++;
-	}
-
-	if (finalChallenge = true) {
-		// 3 - challenge 1
-		if (third === 1 && keyCode === UP_ARROW && keyCode === DOWN_ARROW) {
-			third = 2;
-		} else
-			(third === 1 && (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW)){
-			third = 2;
-			failCounter++;
-		}
-		// 3 - challenge 2
-		if (third === 2 && keyCode === LEFT_ARROW && keyCode === DOWN_ARROW) {
-			third = 3;
-		} else
-			(third === 2 && (keyCode === UP_ARROW || keyCode === RIGHT_ARROW)){
-			third = 3;
-			failCounter++;
-		}
-		// 3 - challenge 3
-		if (third === 3 && keyCode === LEFT_ARROW && keyCode === RIGHT_ARROW) {
-			vidNum = 9;
-		} else
-			(third === 3 && (keyCode === UP_ARROW || keyCode === DOWN_ARROW)){
-			failCounter++;
-			vidNum = 10;
-		}
+	// challenge two - fail
 
  	return false; // prevent any default behaviour
-}
-
-// 1 - success
-function vidLoad3() {
-	if (vidNum == 3 && challenge == 1) {
-	  vid3.play();
-		vidNum = 5;
-	}
-}
-
-// 1 - fail
-function vidLoad4() {
-	if (vidNum == 4) {
-	  vid4.play();
-		vidNum = 5;
-	}
-}
-
-// Challenge 2
-function vidLoad5() {
-	if (vidNum == 5 && challenge == 2) {
-	  vid5.play();
-	}
-}
-
-// 2 - success
-function vidLoad6() {
-	if (vidNum == 6) {
-	  vid6.play();
-		vidNum = 8;
-	}
-}
-
-// 2 - fail
-function vidLoad7() {
-	if (vidNum == 7) {
-	  vid7.play();
-		vidNum = 8;
-
-	}
-}
-
-// Challenge 3
-function vidLoad8() {
-	if (vidNum == 8 && challenge == 3) {
-	  vid8.play();
-		finalChallenge = true;
-		third = 1;
-	}
-}
-
-// 3 - success a
-
-function vidLoad9() {
-	if (vidNum == 9) {
-	  vid9.play();
-		vidNum = 10;
-	}
-}
-
-// 3 - success b
-function vidLoad10() {
-	if (vidNum == 10 && failCounter > 3) {
-	  vid10.play();
-	}
-}
-
-// 3 - fail
-
-function vidLoad11() {
-	if (vidNum == 10 && failCounter >=3) {
-	  vid11.play();
-	}
 }

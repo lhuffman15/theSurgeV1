@@ -136,14 +136,37 @@ if (change === "fail 1") {
 if (sectionNum === 3) {
 	image(section3, 0, 0, w, h);
 	text("The Surge is distracted, make a run for it!", pad, h+pad, w - pad, 300);
+	change = "challenge 2";
 }
 
 //challenge 1 fail
 if (sectionNum === 4) {
 	image(section4, 0, 0, w, h);
 	text("The Surge saw you and electrifies you!", pad, h+pad, w - pad, 300);
+	change = "challenge 2";
 }
 
+// if (change === "challenge 2") {
+// 	sectionNum = 5;
+// }
+
+if (sectionNum == 2 && speaker == true) {
+	change = "success1";
+} else if (sectionNum == 2 && net == true) {
+	change = "fail 1";
+} else if (sectionNum == 2 && shield == true) {
+	change = "fail 1";
+} else if (sectionNum == 2 && chicken == true) {
+	change = "fail 1";
+}
+
+if (change === "success1") {
+	sectionNum = 3;
+}
+
+if (change === "fail 1") {
+	sectionNum = 4;
+}
 
 //challenge 2 setup
 if (sectionNum == 5 && challenge == 2) {
@@ -273,7 +296,6 @@ function keyPressed() {
 
  	return false; // prevent any default behaviour
 }
-
 
 // OLD CODE
 // //Declare variables

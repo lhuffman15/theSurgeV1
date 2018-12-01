@@ -19,13 +19,16 @@ var section14;
 var section15;
 var failCounter = 0;
 var challenge = 0;
-var nextChallenge = 0;
 var fail0;
 var fail1;
 var fail2;
 var fail3;
 var what = "start";
-var boo = false;
+var shield = false;
+var net = false;
+var speaker = false;
+var chicken = false;
+var change;
 
 
 //Layout variables
@@ -63,7 +66,7 @@ function preload(){
 }
 
 function setup() {
-	createCanvas(w, h + 300);
+	createCanvas(w, h + 350);
 	if (sectionNum == 0) {
 		image(section0, 0, 0, w, h);
 	}
@@ -72,6 +75,8 @@ function setup() {
 	textSize(38);
 	fill(textFill);
 }
+
+
 
 function draw() {
 	background(0);
@@ -83,29 +88,54 @@ if (sectionNum == 0 && what == "start") {
 	text("Press the speaker to start", pad, h+pad, w - pad, 300);
 }
 
+if (sectionNum == 0 && speaker == true) {
+	sectionNum = 1;
+	what = "instruct";
+}
+
 //instructional
 if (sectionNum == 1) {
 	image(section1, 0, 0, w, h);
-	text("Something’s coming!! Pick the best object below to thwart each attack and avoid becoming that thing’s lunch!", pad, h+pad, w - pad, 300);
+	text("Something’s coming!! Pick the best object below to thwart each attack and avoid becoming that thing’s lunch! Press the chicken to continue.", pad, h+pad, w - pad, 300);
+}
+
+if (sectionNum == 1 && chicken == true) {
+	change = "challenge 1";
+}
+
+if (change === "challenge 1") {
+	sectionNum = 2;
 }
 
 //challenge 1 setup
-if (sectionNum == 2) {
+if (sectionNum === 2) {
 	image(section2, 0, 0, w, h);
 	text("We need to divert this thing's attention, try throwing your voice!", pad, h+pad, w - pad, 300);
 }
 
+if (sectionNum == 2 && speaker == true) {
+	change = "success1";
+} else if (sectionNum == 2 && speaker == false) {
+	change = "fail 1";
+}
+
+if (change === "success1") {
+	sectionNum = 3;
+}
+
+// if (change === "fail 1") {
+// 	sectionNum = 4;
+// }
+
 //challenge 1 success
-if (sectionNum == 3 && challenge == 1) {
+if (sectionNum === 3) {
 	image(section3, 0, 0, w, h);
-	challenge = 2;
-	text("The Surge is distracted, make a run it!", pad, h+pad, w - pad, 300);
+	text("The Surge is distracted, make a run for it!", pad, h+pad, w - pad, 300);
 }
 
 //challenge 1 fail
-if (sectionNum == 4 && challenge == 1) {
-	image(section3, 0, 0, w, h);
-	challenge = 2;
+if (sectionNum === 4) {
+	image(section4, 0, 0, w, h);
 	text("The Surge saw you and electrifies you!", pad, h+pad, w - pad, 300);
 }
 
@@ -200,39 +230,40 @@ if (failCounter === 3 && challenge >= 1) {
 
 }
 
-function callBack1() {
-
-}
 
 function keyPressed() {
 
-	//go from intro to instructions
-	if (challenge == 0 && (key === 'W' || key === 'w' || key === 'A' || key === 'a' || key === 'S'
-|| key === 's' || key === 'D' || key === 'd')){
-		sectionNum = 1;
-		what = "instruct";
+	//
+	if (keyCode === LEFT_ARROW) {
+		shield = true;
+		speaker = false;
+		net = false;
+		chicken = false;
 	}
 
-	// //go from intro to instructions
-	// if (challenge == 0 && what == "start" && (keyCode === UP_ARROW || keyCode === RIGHT_ARROW || keyCode === LEFT_ARROW || keyCode === DOWN_ARROW)){
-	// 	sectionNum = 1;
-	// 	what = "instruct";
-	// }
-
-	// go from instructions to challenge 1
-	if ((key === "A" || key === "a") && sectionNum == 1) {
-		sectionNum = 2;
-		challenge = 1;
+	//
+	if (keyCode === UP_ARROW) {
+		shield = false;
+		speaker = true;
+		net = false;
+		chicken = false;
 	}
 
-
-	// challenge one - success
-	if (keyCode === RIGHT_ARROW || keyCode === LEFT_ARROW || DOWN_ARROW && challenge === 1 && what == "instruct") {
-		sectionNum = 3;
-		failCounter++;
+	//
+	if (keyCode === DOWN_ARROW) {
+		shield = false;
+		speaker = false;
+		net = true;
+		chicken = false;
 	}
 
-	// challenge two - fail
+	//
+	if (keyCode === RIGHT_ARROW) {
+		shield = false;
+		speaker = false;
+		net = false;
+		chicken = true;
+	}
 
  	return false; // prevent any default behaviour
 }

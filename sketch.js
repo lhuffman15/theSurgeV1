@@ -101,6 +101,7 @@ if (sectionNum == 1) {
 
 if (sectionNum == 1 && chicken == true) {
 	change = "challenge 1";
+	chicken = false;
 }
 
 if (change === "challenge 1") {
@@ -115,7 +116,11 @@ if (sectionNum === 2) {
 
 if (sectionNum == 2 && speaker == true) {
 	change = "success1";
-} else if (sectionNum == 2 && speaker == false) {
+} else if (sectionNum == 2 && net == true) {
+	change = "fail 1";
+} else if (sectionNum == 2 && shield == true) {
+	change = "fail 1";
+} else if (sectionNum == 2 && chicken == true) {
 	change = "fail 1";
 }
 
@@ -123,9 +128,9 @@ if (change === "success1") {
 	sectionNum = 3;
 }
 
-// if (change === "fail 1") {
-// 	sectionNum = 4;
-// }
+if (change === "fail 1") {
+	sectionNum = 4;
+}
 
 //challenge 1 success
 if (sectionNum === 3) {
@@ -138,6 +143,7 @@ if (sectionNum === 4) {
 	image(section4, 0, 0, w, h);
 	text("The Surge saw you and electrifies you!", pad, h+pad, w - pad, 300);
 }
+
 
 //challenge 2 setup
 if (sectionNum == 5 && challenge == 2) {
